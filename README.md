@@ -74,7 +74,17 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 * Bash interpreter
-* Git commandline tool 
+* Git
+
+Install on RPM-based Linux distros:
+```
+sudo dnf install git-all
+```
+
+Install on Debian-based Linux distros:
+```
+sudo apt install git-all
+```
 
 ### Installation
 
