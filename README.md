@@ -109,16 +109,14 @@ Use this space to show useful examples of how a project can be used. Additional 
 _For more examples, please refer to the [Documentation](https://example.com)_
  -->
 One time run:
-```
-bash Cloudflare.sh
-```
+* ``` bash Cloudflare.sh ```
 
 Cyclic activation (using crontab):
 * Go to crontab editing:
-* ``` crontab - e ```
-* Add crontab entry like this (Example: run script every 10 minutes):
-* ``` */10 * * * * /path/to/script ```
-* To get more timing options check out [crontab guru](https://crontab.guru/) 
+  * ``` crontab - e ```
+* Add crontab entry like this (Example - run script every 10 minutes):
+  * ``` */10 * * * * /path/to/script ```
+  * To get more timing options check out [crontab guru](https://crontab.guru/) 
 <!-- CONTRIBUTING -->
 ## Contributing :heart:
 
