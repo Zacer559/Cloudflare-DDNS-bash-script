@@ -75,16 +75,10 @@ To get a local copy up and running follow these simple steps.
 
 * Bash interpreter
 * Git
-
-Install on RPM-based Linux distros:
-```
-sudo dnf install git-all
-```
-
-Install on Debian-based Linux distros:
-```
-sudo apt install git-all
-```
+  * Install on RPM-based Linux distros:
+  * ``` sudo dnf install git-all ```
+  * Install on Debian-based Linux distros:
+  * ``` sudo apt install git-all ```
 
 ### Installation
 
