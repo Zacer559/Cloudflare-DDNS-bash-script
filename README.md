@@ -73,8 +73,8 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-* Bash interpreter
-* Git
+* [Bash](https://en.m.wikipedia.org/wiki/Bash_(Unix_shell))
+* [Git](https://git-scm.com/) 
   * Install on RPM-based Linux distros:
   * ``` sudo dnf install git-all ```
   * Install on Debian-based Linux distros:
@@ -108,12 +108,17 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 _For more examples, please refer to the [Documentation](https://example.com)_
  -->
-Run the script:
+One time run:
 ```
 bash Cloudflare.sh
 ```
 
-
+Cyclic activation (using crontab):
+* Go to crontab editing:
+* ``` crontab - e ```
+* Add crontab entry like this (Example: run script every 10 minutes):
+* ``` */10 * * * * /path/to/script ```
+* To get more timing options check out [crontab guru](https://crontab.guru/) 
 <!-- CONTRIBUTING -->
 ## Contributing :heart:
 
