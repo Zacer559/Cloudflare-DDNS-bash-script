@@ -8,6 +8,7 @@ ZONE_NAME="Your_zone_name"
 IP_FILE="/tmp/CloudFlare_IP" 
 PROXIED=true
 
+
 # Cheking that data was provided
 if [ "$AUTH_KEY" = "Your_authorization_key" ] || [ "$AUTH_KEY" = "" ]; then
     echo "Missing Cloudflare API Key."
@@ -17,7 +18,7 @@ if [ "$AUTH_EMAIL" = "Your_email_adress_in_cloudflare_services" ] || [ "$AUTH_EM
     echo "Missing email address, used to create Cloudflare account."
     exit 2
 fi
-if [ ${#RECORD_NAMES[@]} = 0 ] || [ ${RECORD_NAMES[0]} = "Your_name_1" ] || [ ${RECORD_NAMES[1]} = "Your_name_2" ]; then
+if [ ${#RECORD_NAMES[@]} = 0 ] || [ ${RECORD_NAMES[0]} = "Your_name_1" ] ; then
     echo "Missing hostname, you should provide at least one name."
     exit 2
 fi
@@ -25,6 +26,7 @@ if [ "$ZONE_NAME" = "Your_zone_name" ] || [ "$ZONE_NAME" = "" ]; then
     echo "Missing zone name."
     exit 2
 fi
+
 
 # Obtaing zone ID
 ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$ZONE_NAME" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json" | grep -Po '(?<="id":")[^"]*' | head -1)
@@ -35,6 +37,7 @@ if [ "$ZONE_ID" = "" ]; then
     exit 2
 fi
 
+
 # Checking that file exists
 if [ -f $IP_FILE ]; then
     IP_FROM_FILE=$(cat $IP_FILE)
@@ -42,6 +45,7 @@ else
     IP_FROM_FILE=""
     echo "No file with old IP, dont worry script will still work, and create that file for you :)"
 fi
+
 
 # Get the current public IP address
 ACTUAL_IP=$(curl --silent https://api.ipify.org) || exit 1
@@ -52,8 +56,8 @@ if [ "$ACTUAL_IP" = "$IP_FROM_FILE" ]; then
     exit 0
 fi
 
-# Otherwise, your Internet provider changed your public IP again.
 
+# Otherwise, your Internet provider changed your public IP again.
 # Loop for all our records.
 for i in ${!RECORD_NAMES[@]}; do
 
