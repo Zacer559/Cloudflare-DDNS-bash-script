@@ -101,6 +101,7 @@ nano Cloudflare.sh
 
 
 ![alt text](https://github.com/Zacer559/Cloudflare-DDNS-bash-script/blob/main/Pictures/Cloudflare%20Console.png)
+
 So in case of that picture you config should look like:
 ```
 declare -a RECORD_NAMES=("zacer.pl" "mail.zacer.pl" "vpn.zacer.pl" "dysk.zacer.pl")
