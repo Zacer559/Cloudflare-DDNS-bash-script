@@ -109,6 +109,8 @@ declare -a RECORD_NAMES=("zacer.pl" "mail.zacer.pl" "vpn.zacer.pl" "dysk.zacer.p
 AUTH_EMAIL="example@example.com"
 AUTH_KEY="8M7wS6hCpXVc-DoRnPPY_UCWPgy8aea4Wy6kCe5T"
 ZONE_NAME="zacer.pl"
+IP_FILE="/tmp/CloudFlare_IP" 
+PROXIED=true
 ```
 Here is the [guide how to get authorization key](https://support.cloudflare.com/hc/en-us/articles/200167836-Managing-API-Tokens-and-Keys).
 
