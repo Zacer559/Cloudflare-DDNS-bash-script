@@ -102,12 +102,13 @@ nano Cloudflare.sh
 
 ![alt text](https://github.com/Zacer559/Cloudflare-DDNS-bash-script/blob/main/Pictures/Cloudflare%20Console.png)
 
-So in case of that picture you config should look like:
+So in case of that picture your config should look similar to this:
 ```
+# Declarations of names and ids of records.
 declare -a RECORD_NAMES=("zacer.pl" "mail.zacer.pl" "vpn.zacer.pl" "dysk.zacer.pl")
 AUTH_EMAIL="example@example.com"
 AUTH_KEY="8M7wS6hCpXVc-DoRnPPY_UCWPgy8aea4Wy6kCe5T"
-ZONE_NAME="zacer"
+ZONE_NAME="zacer.pl"
 ```
 Here is the [guide how to get authorization key](https://support.cloudflare.com/hc/en-us/articles/200167836-Managing-API-Tokens-and-Keys).
 
