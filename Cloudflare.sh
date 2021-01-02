@@ -5,8 +5,7 @@ declare -a RECORD_NAMES=("Your_name_1" "Your_name_2")
 AUTH_EMAIL="Your_email_adress_in_cloudflare_services"
 AUTH_KEY="Your_authorization_key"
 ZONE_NAME="Your_zone_name"
-# Retrieve the last recorded public IP address
-IP_FILE="/tmp/CloudFlare_IP"
+IP_FILE="/tmp/CloudFlare_IP" 
 
 # Cheking that data was provided
 if [ "$AUTH_KEY" = "Your_authorization_key" ] || [ "$AUTH_KEY" = "" ]; then
