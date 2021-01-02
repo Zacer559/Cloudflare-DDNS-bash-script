@@ -100,6 +100,10 @@ nano Cloudflare.sh
 ```
 
 
+![alt text](https://github.com/Zacer559/Cloudflare-DDNS-bash-script/blob/main/Pictures/Cloudflare%20Console.png)
+
+
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage :eyes:
