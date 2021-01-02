@@ -115,7 +115,7 @@ Cyclic activation (using crontab):
 * Go to crontab editing:
   * ``` crontab - e ```
 * Add crontab entry like this (Example - run script every 10 minutes):
-  * ``` */10 * * * * /path/to/script ```
+  * ``` */10 * * * * /path/to/script >> /dev/null ```
   * To get more timing options check out [crontab guru](https://crontab.guru/) 
 <!-- CONTRIBUTING -->
 ## Contributing :heart:
