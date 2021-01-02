@@ -30,8 +30,7 @@ fi
 ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$ZONE_NAME" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json" | grep -Po '(?<="id":")[^"]*' | head -1)
 
 if [ "$ZONE_ID" = "" ]; then
-    echo "Something went wrong"
-    printf '<%s:%s> ' "${FUNCNAME[i]}" "${BASH_LINENO[i]}"
+    printf 'Something went wrong in line: %s \n' "${BASH_LINENO[i]}";
     echo $(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$NAME_OF_RECORD" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json")
     exit 2
 fi
@@ -84,8 +83,7 @@ EOF
         echo $ACTUAL_IP >$IP_FILE
         echo "$NAME_OF_RECORD IP address updated successful"
     else
-        echo 'Something went wrong :('
-        printf '<%s:%s> ' "${FUNCNAME[i]}" "${BASH_LINENO[i]}"
+        printf 'Something went wrong in line: %s \n' "${BASH_LINENO[i]}";
         echo "Response: $RESPONSE"
     fi
 
