@@ -6,6 +6,7 @@ AUTH_EMAIL="Your_email_adress_in_cloudflare_services"
 AUTH_KEY="Your_authorization_key"
 ZONE_NAME="Your_zone_name"
 IP_FILE="/tmp/CloudFlare_IP" 
+PROXIED=true
 
 # Cheking that data was provided
 if [ "$AUTH_KEY" = "Your_authorization_key" ] || [ "$AUTH_KEY" = "" ]; then
@@ -66,7 +67,7 @@ for i in ${!RECORD_NAMES[@]}; do
   	"name": "$NAME_OF_RECORD",
   	"content": "$ACTUAL_IP",
   	"ttl": 180,
-  	"proxied": false }
+  	"proxied": $PROXIED }
 EOF
     )
 
