@@ -2,10 +2,9 @@
 
 # Declarations of names and ids of records.
 declare -a RECORD_NAMES=("Your_name_1" "Your_name_2")
-declare -a RECORD_IDS=("ID_of_your_name_1" "ID_of_your_name_2")
-AUTH_EMAIL=Your_email_adress_in_cloudflare_services
-AUTH_KEY=Your_authorization_key
-ZONE_ID=Your_zone_id
+AUTH_EMAIL="Your_email_adress_in_cloudflare_services"
+AUTH_KEY="Your_authorization_key"
+ZONE_NAME="Your_zone_name"
 # Retrieve the last recorded public IP address
 IP_FILE="/tmp/CloudFlare_IP"
 
@@ -22,12 +21,18 @@ if [ ${#RECORD_NAMES[@]} = 0 ] || [ ${RECORD_NAMES[0]} = "Your_name_1" ] || [ ${
     echo "Missing hostname, you should provide at least one name."
     exit 2
 fi
-if [ "$ZONE_ID" = "" ] || [ "$ZONE_ID" = "Your_zone_id" ]; then
-    echo "Missing zone ID"
+if [ "$ZONE_NAME" = "Your_zone_name" ] || [ "$ZONE_NAME" = "" ]; then
+    echo "Missing zone name."
     exit 2
 fi
-if [ ${#RECORD_IDS[@]} = 0 ] || [ ${RECORD_NAMES[0]} = "ID_of_your_name_1" ] || [ ${RECORD_IDS[1]} = "ID_of_your_name_2" ]; then
-    echo "Missing record ID."
+
+# Obtaing zone ID
+ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=$ZONE_NAME" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json" | grep -Po '(?<="id":")[^"]*' | head -1)
+
+if [ "$ZONE_ID" = "" ]; then
+    echo "Something went wrong"
+    printf '<%s:%s> ' "${FUNCNAME[i]}" "${BASH_LINENO[i]}"
+    echo $(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$NAME_OF_RECORD" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json")
     exit 2
 fi
 
@@ -53,14 +58,14 @@ fi
 # Loop for all our records.
 for i in ${!RECORD_NAMES[@]}; do
 
-    ID=${RECORD_IDS[$i]}
-    NAMEE=${RECORD_NAMES[$i]}
-
+    NAME_OF_RECORD=${RECORD_NAMES[$i]}
+    # Getting ID of record
+    ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$NAME_OF_RECORD" -H "X-Auth-Email: $AUTH_EMAIL" -H "X-Auth-Key: $AUTH_KEY" -H "Content-Type: application/json" | grep -Po '(?<="id":")[^"]*' | head -1)
     # Creating record with the new public IP address for Cloudflare using API v4
     RECORD=$(
         cat <<EOF
 	{ "type": "A",
-  	"name": "$NAMEE",
+  	"name": "$NAME_OF_RECORD",
   	"content": "$ACTUAL_IP",
   	"ttl": 180,
   	"proxied": false }
@@ -73,13 +78,15 @@ EOF
         -H "X-Auth-Email: $AUTH_EMAIL" \
         -H "X-Auth-Key: $AUTH_KEY" \
         -d "$RECORD")
-# Check that response from Cloudflare is success
+
     if [ "$(echo $RESPONSE | grep "\"success\":true")" != "" ]; then
         # Saves new IP to file.
         echo $ACTUAL_IP >$IP_FILE
-        echo "$NAMEE IP address updated successful"
+        echo "$NAME_OF_RECORD IP address updated successful"
     else
         echo 'Something went wrong :('
+        printf '<%s:%s> ' "${FUNCNAME[i]}" "${BASH_LINENO[i]}"
         echo "Response: $RESPONSE"
     fi
+
 done
