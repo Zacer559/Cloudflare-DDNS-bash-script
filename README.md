@@ -17,7 +17,7 @@
   <h3 align="center">Cloudflare DDNS bash script</h3>
 
   <p align="center">
-    Server Management is an simple script written in bash for updating IP address in Cloudflare DNS services. 
+    Cloudflare DDNS bash script is an simple script written in bash for updating IP address in Cloudflare DNS services. 
     <br />
     <br />
     <a href="https://github.com/Zacer559/Cloudflare-DDNS-bash-script/issues">Report Bug</a>
