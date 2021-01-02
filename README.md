@@ -94,7 +94,7 @@ To get a local copy up and running follow these simple steps.
 cd Cloudflare-DDNS-bash-script
 ```
 
-3. Change all XXXX parameters in file to your for example using nano:
+3. Change all declaration parameters(line 4 to 9) in file to your for example using nano:
 ```
 nano Cloudflare.sh
 ```
